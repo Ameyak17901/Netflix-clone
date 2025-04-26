@@ -5,6 +5,7 @@ import { LoginCredentials } from "../models/user";
 
 type LoginProps = {
   login: (cred: LoginCredentials) => Promise<void>;
+  isLoggingIn: boolean;
 };
 
 export default function LoginPage() {
@@ -12,7 +13,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
-  const { login } = useAuthStore() as LoginProps;
+  const { login, isLoggingIn } = useAuthStore() as LoginProps;
 
   const handleSignIn = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -70,7 +71,7 @@ export default function LoginPage() {
               />
             </div>
             <button className="w-full py-2 text-white rounded-md bg-red-600 hover:bg-red-700 font-semibold">
-              Login In
+              {isLoggingIn ? "Loading..." : "Login"}
             </button>
           </form>
           <div className="text-center text-gray-400">

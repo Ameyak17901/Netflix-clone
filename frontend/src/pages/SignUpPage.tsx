@@ -4,6 +4,7 @@ import { useAuthStore } from "../store/authUser";
 import { SignUpCredentials } from "../models/user";
 type authParams = {
   signup: (val: SignUpCredentials) => Promise<string>;
+  isSignUp: boolean;
 };
 
 export default function SignUpPage() {
@@ -15,7 +16,7 @@ export default function SignUpPage() {
     password: "",
   });
 
-  const { signup } = useAuthStore((state) => state) as authParams;
+  const { signup, isSignUp } = useAuthStore((state) => state) as authParams;
 
   const handleSignup = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -93,7 +94,7 @@ export default function SignUpPage() {
               />
             </div>
             <button className="w-full py-2 text-white rounded-md bg-red-600 hover:bg-red-700 font-semibold">
-              Sign Up
+              {isSignUp ? "Loading..." : "Sign Up"}
             </button>
           </form>
           <div className="text-center text-gray-400">
